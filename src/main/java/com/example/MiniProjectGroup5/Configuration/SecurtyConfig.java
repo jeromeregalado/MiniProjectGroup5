@@ -1,6 +1,7 @@
 package com.example.MiniProjectGroup5.Configuration;
 
 import com.example.MiniProjectGroup5.service.EmployeeServiceImpl;
+import com.example.MiniProjectGroup5.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +26,8 @@ public class SecurtyConfig extends WebSecurityConfigurerAdapter {
 
 
     @Resource
-    private EmployeeServiceImpl employeeServiceImpl;
+//    private EmployeeServiceImpl employeeService;
+    private UserServiceImpl userService;
 
     @Override
     @Bean
@@ -35,7 +37,7 @@ public class SecurtyConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(employeeServiceImpl)
+        auth.userDetailsService(userService)
                 .passwordEncoder(encoder());
     }
 
