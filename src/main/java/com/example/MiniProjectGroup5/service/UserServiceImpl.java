@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
-    public User saveUser(User user) {
+    public User saveUser(User user) throws RecordNotFoundException {
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
     }

@@ -1,5 +1,6 @@
 package com.example.MiniProjectGroup5.repository;
 
+import com.example.MiniProjectGroup5.enums.CommunityType;
 import com.example.MiniProjectGroup5.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -12,6 +13,6 @@ public interface EmployeeRepository extends PagingAndSortingRepository<Employee,
     List<Employee> findEmployeesByName(String name);
     List<Employee> findEmployeesByLevel(String level);
     List<Employee> findEmployeesByEmail(String email);
-    List<Employee> findEmployeesByCommunity(String community);
+    List<Employee> findEmployeesByCommunity(CommunityType communityType);
 
 }

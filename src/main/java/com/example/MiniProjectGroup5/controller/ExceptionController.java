@@ -6,8 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ExceptionController {
 
     @ExceptionHandler(value = RecordNotFoundException.class)
@@ -19,5 +20,6 @@ public class ExceptionController {
     public ResponseEntity<Object> exception2() {
         return new ResponseEntity<>("Community not present", HttpStatus.BAD_REQUEST);
     }
+
 
 }

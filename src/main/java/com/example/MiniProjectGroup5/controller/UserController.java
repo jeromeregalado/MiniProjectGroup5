@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController {
 
-    @PostMapping("")
-    public User saveUser(@RequestBody User user) {
+    @PostMapping("/saveUser")
+    public User saveUser(@RequestBody User user) throws RecordNotFoundException {
         return userService.saveUser(user);
     }
 

@@ -9,7 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface UserService {
-    public User saveUser(User user);
+    public User saveUser(User user) throws RecordNotFoundException;
     Page<User> findAllUsers(Pageable pageable);
     public void deleteUser(Long userId) throws RecordNotFoundException;
 

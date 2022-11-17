@@ -1,6 +1,7 @@
 package com.example.MiniProjectGroup5.model;
 
 import com.example.MiniProjectGroup5.enums.CommunityType;
+import com.fasterxml.jackson.databind.ser.Serializers;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employee {
+public class Employee extends BaseAuditClass {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
