@@ -10,7 +10,6 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,11 +20,11 @@ public class SwaggerConfiguration {
 
 
     private ApiInfo apiInfo() {
-        return new ApiInfo("Final Group Exercise",
-                "Description.",
+        return new ApiInfo("Group 5 Mini Project",
+                "Marvin Hipolito, Eshant Manghnani, Jerome Regalado",
                 "1.0",
                 "Terms of service",
-                new Contact("Group 3", "", "group3@gmail.com"),
+                new Contact("Group 5", "https://github.com/jeromeregalado/MiniProjectGroup5", "group5@softvision.com"),
                 "License",
                 "License url",
                 Collections.emptyList());
