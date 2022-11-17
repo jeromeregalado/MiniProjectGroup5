@@ -33,7 +33,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/users/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN")
-                .anyRequest().denyAll()
                 .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
     }
 
