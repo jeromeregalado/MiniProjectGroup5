@@ -5,6 +5,7 @@ import com.example.MiniProjectGroup5.exception.RecordNotFoundException;
 import com.example.MiniProjectGroup5.model.Employee;
 import com.example.MiniProjectGroup5.model.User;
 import com.example.MiniProjectGroup5.repository.UserRepository;
+import javassist.Loader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -13,6 +14,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -39,6 +41,12 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     }
 
     @Override
+    public User saveUser(User user) {
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        return userRepository.save(user);
+    }
+
+    @Override
     public Page<User> findAllUsers(Pageable pageable) {
         return userRepository.findAll(pageable);
     }
@@ -59,5 +67,16 @@ public class UserServiceImpl implements UserDetailsService, UserService {
                 .stream()
                 .filter(user -> user.getType().equals(userType)).toList();
         return new PageImpl<>(userWithSpecificType);
+    }
+
+    @Override
+    public void deleteUser(Long userId) throws RecordNotFoundException {
+        Optional<User> userOptional = userRepository.findById(userId);
+        if  (userOptional.isPresent()) {
+            userRepository.delete(userOptional.get());
+        } else {
+            throw new RecordNotFoundException();
+        }
+
     }
 }

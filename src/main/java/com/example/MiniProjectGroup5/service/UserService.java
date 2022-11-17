@@ -9,7 +9,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface UserService {
+    public User saveUser(User user);
     Page<User> findAllUsers(Pageable pageable);
+    public void deleteUser(Long userId) throws RecordNotFoundException;
 
     User findUserById(Long userId) throws RecordNotFoundException;
 

@@ -56,6 +56,6 @@ public class EmployeeController {
     @DeleteMapping("/deleteEmployee/{employeeId}")
     public ResponseEntity<?> deleteEmployee(@PathVariable Long employeeId) throws RecordNotFoundException {
         employeeService.deleteEmployee(employeeId);
-        return new ResponseEntity<>("Delete Complete",HttpStatus.OK);
+        return new ResponseEntity<>("Employee Delete Complete",HttpStatus.OK);
     }
 }
