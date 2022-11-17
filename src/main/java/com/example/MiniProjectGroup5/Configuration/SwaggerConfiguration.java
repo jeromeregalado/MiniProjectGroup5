@@ -37,7 +37,7 @@ public class SwaggerConfiguration {
                 .securityContexts(Collections.singletonList(securityContext()))
                 .securitySchemes(List.of(apiKey()))
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.example.MiniProjectGroup5.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }
