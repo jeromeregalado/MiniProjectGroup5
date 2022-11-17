@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employee extends BaseAuditClass{
+public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,8 +24,7 @@ public class Employee extends BaseAuditClass{
     @Enumerated(value = EnumType.STRING)
     private CommunityType community;
 
-    public Employee(String name, String level, String email, CommunityType community)
-    {
+    public Employee(String name, String level, String email, CommunityType community) {
         this.name = name;
         this.level = level;
         this.email = email;

@@ -25,7 +25,7 @@ public class EmployeeController {
     }
 
     // Getting all employee
-    @GetMapping("/getAll")
+    @GetMapping("/getAll") //(/employees/getAll)
     public ResponseEntity<Page<Employee>> getEmployees(Pageable pageable) {
         Page<Employee> employee = employeeService.findAllEmployees(pageable);
         return new ResponseEntity<>(employee, HttpStatus.OK);
@@ -44,7 +44,7 @@ public class EmployeeController {
     }
 
     // Update employee by id
-    @PutMapping("/{employeeId}")
+    @PutMapping("/updateEmployee/{employeeId}")
     public Employee updateEmployee(
             @PathVariable Long employeeId,
             @RequestBody Employee newEmployee
@@ -53,8 +53,9 @@ public class EmployeeController {
     }
 
     // Delete employee by id
-    @DeleteMapping("/{employeeId}")
-    public void deleteEmployee(@PathVariable Long id) throws RecordNotFoundException {
-        employeeService.deleteEmployee(id);
+    @DeleteMapping("/deleteEmployee/{employeeId}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Long employeeId) throws RecordNotFoundException {
+        employeeService.deleteEmployee(employeeId);
+        return new ResponseEntity<>("Delete Complete",HttpStatus.OK);
     }
 }
