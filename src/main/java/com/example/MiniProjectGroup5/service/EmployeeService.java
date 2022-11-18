@@ -5,6 +5,7 @@ import com.example.MiniProjectGroup5.exception.RecordNotFoundException;
 import com.example.MiniProjectGroup5.model.Employee;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.server.ResponseStatusException;
 
 public interface EmployeeService {
     Employee saveEmployee(Employee employee);
@@ -15,7 +16,7 @@ public interface EmployeeService {
 
     Employee updateEmployee(Long employeeId, Employee newEmployee) throws RecordNotFoundException;
 
-    public Page<Employee> findByType(CommunityType communityType, Pageable pageable) throws RecordNotFoundException;
+    public Page<Employee> findByType(CommunityType communityType, Pageable pageable) throws ResponseStatusException;
 
     void deleteEmployee(Long employeeId) throws RecordNotFoundException;
 }

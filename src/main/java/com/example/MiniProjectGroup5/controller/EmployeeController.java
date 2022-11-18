@@ -4,13 +4,14 @@ import com.example.MiniProjectGroup5.enums.CommunityType;
 import com.example.MiniProjectGroup5.exception.RecordNotFoundException;
 import com.example.MiniProjectGroup5.model.Employee;
 import com.example.MiniProjectGroup5.service.EmployeeService;
+import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
+import org.springframework.web.client.HttpClientErrorException;
 
 
 @RestController
@@ -41,7 +42,7 @@ public class EmployeeController {
 
     // Getting employee by TYPE
     @GetMapping("/types/{communityType}")
-    public Page<Employee> getEmployeeByType(@PathVariable CommunityType communityType, Pageable pageable) throws RecordNotFoundException {
+    public Page<Employee> getEmployeeByType(@PathVariable CommunityType communityType, Pageable pageable) throws RecordNotFoundException{
         return employeeService.findByType(communityType, pageable);
     }
 
