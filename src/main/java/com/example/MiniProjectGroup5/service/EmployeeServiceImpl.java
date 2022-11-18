@@ -8,16 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl implements EmployeeService{
 
     @Autowired
     EmployeeRepository employeeRepo;
@@ -70,7 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Page<Employee> findByType(CommunityType communityType, Pageable pageable) throws RecordNotFoundException {
+    public Page<Employee> findByType(CommunityType communityType, Pageable pageable) throws ResponseStatusException {
         List<Employee> employeesWithSpecificType = employeeRepo.findAll(pageable)
                 .stream()
                 .filter(employee -> employee.getCommunity().equals(communityType)).toList();

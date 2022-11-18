@@ -1,33 +1,33 @@
 package com.example.MiniProjectGroup5.model;
 
+
 import com.example.MiniProjectGroup5.enums.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import net.bytebuddy.dynamic.loading.InjectionClassLoader;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class User extends BaseAuditClass{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String username;
+
+    @Column
     private String password;
+
+    @Column
+    private String username;
 
     @Enumerated(value = EnumType.STRING)
     private UserType type;
 
 
-    public User(String username, String password, List<SimpleGrantedAuthority> authority) {
-
-    }
 }

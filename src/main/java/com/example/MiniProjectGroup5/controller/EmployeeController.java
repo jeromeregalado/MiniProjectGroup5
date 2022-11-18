@@ -4,12 +4,15 @@ import com.example.MiniProjectGroup5.enums.CommunityType;
 import com.example.MiniProjectGroup5.exception.RecordNotFoundException;
 import com.example.MiniProjectGroup5.model.Employee;
 import com.example.MiniProjectGroup5.service.EmployeeService;
+import javassist.tools.web.BadHttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
+
 
 @RestController
 @RequestMapping("/employees")
@@ -25,7 +28,7 @@ public class EmployeeController {
     }
 
     // Getting all employee
-    @GetMapping("/getAll")
+    @GetMapping("/getAll") //(/employees/getAll)
     public ResponseEntity<Page<Employee>> getEmployees(Pageable pageable) {
         Page<Employee> employee = employeeService.findAllEmployees(pageable);
         return new ResponseEntity<>(employee, HttpStatus.OK);
@@ -39,12 +42,12 @@ public class EmployeeController {
 
     // Getting employee by TYPE
     @GetMapping("/types/{communityType}")
-    public Page<Employee> getEmployeeByType(@PathVariable CommunityType communityType, Pageable pageable) throws RecordNotFoundException {
+    public Page<Employee> getEmployeeByType(@PathVariable CommunityType communityType, Pageable pageable) throws RecordNotFoundException{
         return employeeService.findByType(communityType, pageable);
     }
 
     // Update employee by id
-    @PutMapping("/{employeeId}")
+    @PutMapping("/updateEmployee/{employeeId}")
     public Employee updateEmployee(
             @PathVariable Long employeeId,
             @RequestBody Employee newEmployee
@@ -53,8 +56,9 @@ public class EmployeeController {
     }
 
     // Delete employee by id
-    @DeleteMapping("/{employeeId}")
-    public void deleteEmployee(@PathVariable Long id) throws RecordNotFoundException {
-        employeeService.deleteEmployee(id);
+    @DeleteMapping("/deleteEmployee/{employeeId}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable Long employeeId) throws RecordNotFoundException {
+        employeeService.deleteEmployee(employeeId);
+        return new ResponseEntity<>("Employee Delete Complete",HttpStatus.OK);
     }
 }

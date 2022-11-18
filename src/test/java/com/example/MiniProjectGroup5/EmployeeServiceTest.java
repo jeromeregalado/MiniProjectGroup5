@@ -81,4 +81,22 @@ public class EmployeeServiceTest {
         //assert
         assertEquals(filteredEmployee,employees);
     }
+
+    @Test
+    @DisplayName("GIVEN employees from SQL " +
+            "WHEN findEmployeesByCommunity() is executed " +
+            "THEN result should validate result is name specified")
+    public void TestFindEmployeeByType()
+    {
+        setup();
+        //arrange
+        Mockito.when(employeeRepository.findEmployeesByCommunity(CommunityType.JAVA))
+                .thenReturn(employeeList.stream().filter(employee -> employee.getCommunity().equals(CommunityType.JAVA)).toList());
+
+        //act
+        List<Employee> filteredEmployee = employeeRepository.findEmployeesByCommunity(CommunityType.JAVA);
+
+        //assert
+        assertThat(filteredEmployee).containsExactly(jojo);
+    }
 }
